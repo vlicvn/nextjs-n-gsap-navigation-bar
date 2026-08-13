@@ -7,8 +7,8 @@ import Menu from "@/components/menu/Menu";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Next.js X GSAP Navigation",
-  description: "A Next.js project with GSAP navigation",
+  title: "Next.js X GSAP Navigation Bar",
+  description: "A Next.js project with GSAP navigation bar animation",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

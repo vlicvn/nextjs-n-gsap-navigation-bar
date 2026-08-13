@@ -7,8 +7,19 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Tüm site genelinde metin seçimini özelleştirir */
+::selection {
+  background-color: #cf5b45; /* Kendi arka plan renginiz (Örn: Turuncu) */
+  color: #fff; /* Seçilen yazının rengi (Örn: Beyaz) */
+}
+
+/* Firefox tarayıcısı için ekstra destek (gerekirse) */
+::-moz-selection {
+  background-color: #cf5b45;
+  color: #fff;
+}
+
 body {
-  font-family: "Saans TRIAL";
   background: #000;
 }
 
