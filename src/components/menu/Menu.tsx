@@ -18,6 +18,10 @@ const Menu = () => {
   const container = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  /* Link holders için dinamik referans dizisi */
+  const linkHoldersRef = useRef<(HTMLDivElement | null)[]>([]);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
   /* GSAP Timeline */
   const tl = useRef<gsap.core.Timeline | null>(null);
 
@@ -27,8 +31,13 @@ const Menu = () => {
 
   useGSAP(
     () => {
-      gsap.set(".menu-link-item-holder", { y: 100, opacity: 0 });
-      gsap.set(".menu-sidebar-col", { y: 30, opacity: 0 });
+      // Geçerli DOM elemanlarını filtrele
+      const validLinks = linkHoldersRef.current.filter(Boolean);
+
+      // Başlangıç durumları
+      gsap.set(validLinks, { y: 100, opacity: 0 });
+      gsap.set(sidebarRef.current, { y: 30, opacity: 0 });
+      gsap.set(".menu-links-col", { opacity: 0, pointerEvents: "none" });
 
       tl.current = gsap
         .timeline({ paused: true })
@@ -38,23 +47,31 @@ const Menu = () => {
           ease: "power4.inOut",
         })
         .to(
-          ".menu-link-item-holder",
+          ".menu-links-col",
+          {
+            opacity: 1,
+            pointerEvents: "auto",
+            duration: 0.4,
+          },
+          "-=0.6"
+        )
+        .to(
+          validLinks,
           {
             y: 0,
             opacity: 1,
             duration: 0.8,
-            stagger: 0.08,
+            stagger: 0.04, // Eleman sayısı fazla olduğu için stagger süresi kısaltıldı
             ease: "power3.out",
           },
           "-=0.5"
         )
         .to(
-          ".menu-sidebar-col",
+          sidebarRef.current,
           {
             y: 0,
             opacity: 1,
             duration: 0.8,
-            stagger: 0.1,
             ease: "power3.out",
           },
           "-=0.6"
@@ -94,9 +111,15 @@ const Menu = () => {
             {/* Sol Taraf: Büyük Modern Navigasyon Linkleri */}
             <div className="menu-links-col">
               <div className="menu-links">
-                {menuLinks.map((link) => (
+                {menuLinks.map((link, index) => (
                   <div className="menu-link-item" key={link.label}>
-                    <div className="menu-link-item-holder" onClick={toggleMenu}>
+                    <div 
+                      className="menu-link-item-holder" 
+                      onClick={toggleMenu}
+                      ref={(el) => {
+                        linkHoldersRef.current[index] = el;
+                      }}
+                    >
                       <Link href={link.path} className="menu-link">
                         <span className="link-num">{link.num}</span>
                         <span className="link-text">{link.label}</span>
@@ -108,7 +131,7 @@ const Menu = () => {
             </div>
 
             {/* Sağ Taraf: Yan Bilgi Alanı (Sidebar) */}
-            <div className="menu-sidebar-col">
+            <div className="menu-sidebar-col" ref={sidebarRef}>
               <div className="sidebar-section">
                 <span className="sidebar-title">Featured Project</span>
                 <Link href="/work" onClick={toggleMenu} className="featured-card">
@@ -120,11 +143,18 @@ const Menu = () => {
               <div className="sidebar-section">
                 <span className="sidebar-title">Social Networks</span>
                 <div className="sidebar-socials">
-                  <Link href="#" target="_blank" rel="noopener noreferrer">X</Link>
-                  <Link href="#" target="_blank" rel="noopener noreferrer">Instagram</Link>
-                  <Link href="#" target="_blank" rel="noopener noreferrer">LinkedIn</Link>
-                  <Link href="#" target="_blank" rel="noopener noreferrer">Behance</Link>
-                  <Link href="#" target="_blank" rel="noopener noreferrer">Dribbble</Link>
+                  <Link href="#" target="_blank" rel="noopener noreferrer">X &#8599;</Link>
+                  <Link href="#" target="_blank" rel="noopener noreferrer">Instagram &#8599;</Link>
+                  <Link href="#" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</Link>
+                  <Link href="#" target="_blank" rel="noopener noreferrer">Facebook &#8599;</Link>
+                </div>
+              </div>
+
+              <div className="sidebar-section">
+                <span className="sidebar-title">Legal & Policy</span>
+                <div className="sidebar-socials">
+                  <Link href="/privacy" onClick={toggleMenu}>Privacy Policy</Link>
+                  <Link href="/terms" onClick={toggleMenu}>Terms of Service</Link>
                 </div>
               </div>
 
