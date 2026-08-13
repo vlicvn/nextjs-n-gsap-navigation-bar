@@ -61,7 +61,7 @@ const Menu = () => {
             y: 0,
             opacity: 1,
             duration: 0.8,
-            stagger: 0.04, // Eleman sayısı fazla olduğu için stagger süresi kısaltıldı
+            stagger: 0.04,
             ease: "power3.out",
           },
           "-=0.5"
@@ -91,7 +91,7 @@ const Menu = () => {
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-bar">
-        <div className="menu-logo">
+        <div className="menu-logo1">
           <Link href={"/"}>NextJS x GSAP</Link>
         </div>
         <div className="menu-open cursor-pointer" onClick={toggleMenu}>
@@ -99,7 +99,7 @@ const Menu = () => {
         </div>
         <div className="menu-overlay">
           <div className="menu-overlay-bar">
-            <div className="menu-logo">
+            <div className="menu-logo2">
               <Link href={"/"}>NextJS x GSAP</Link>
             </div>
             <div className="menu-close cursor-pointer" onClick={toggleMenu}>
