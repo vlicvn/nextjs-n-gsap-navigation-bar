@@ -1,36 +1,201 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js x GSAP Navigation Bar
 
-## Getting Started
+Modern, animasyonlu ve mobil uyumlu bir Next.js navigasyon deneyimi sunan mini portföy / landing page örneğidir. Proje, GSAP ile açılır menü animasyonları ve App Router yapısı ile oluşturulmuştur.
 
-First, run the development server:
+## Özellikler
+
+- Next.js 16 App Router kullanımı
+- GSAP tabanlı animasyonlu menü açma/kapanma etkisi
+- Responsive tasarım (mobil ve masaüstü uyumlu)
+- Görsel olarak premium benzeri full-screen overlay menü
+- Çoklu sayfa yapısı: Ana Sayfa, Work, About, Contact, Lab
+- Tailwind CSS entegrasyonu
+- Minimal ve modern tipografi ve düzen
+
+## Teknoloji Yığını
+
+- Next.js 16
+- React 19
+- GSAP
+- @gsap/react
+- Tailwind CSS
+- TypeScript
+
+## Proje Yapısı
+
+```bash
+nextjs-n-gsap-navigation-bar/
+├── public/
+│   └── hero.jpg
+├── src/
+│   ├── app/
+│   │   ├── about/
+│   │   │   └── page.tsx
+│   │   ├── contact/
+│   │   │   └── page.tsx
+│   │   ├── lab/
+│   │   │   └── page.tsx
+│   │   ├── work/
+│   │   │   └── page.tsx
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   └── components/
+│       └── menu/
+│           ├── Menu.tsx
+│           └── menu.css
+├── package.json
+├── tsconfig.json
+├── next.config.ts
+├── postcss.config.mjs
+├── next-env.d.ts
+└── README.md
+```
+
+## Kurulum
+
+Öncelikle proje klasörüne girin:
+
+```bash
+cd nextjs-n-gsap-navigation-bar
+```
+
+Bağımlılıkları kurun:
+
+```bash
+npm install
+```
+
+## Çalıştırma
+
+Geliştirme sunucusunu başlatın:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tarayıcıda aşağıdaki adresi açın:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Build ve Production
 
-## Learn More
+Production build oluşturmak için:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Üretilen build'i çalıştırmak için:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run start
+```
 
-## Deploy on Vercel
+## Ana Sayfalar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Proje aşağıdaki route yapısını kullanır:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/` — Ana sayfa
+- `/work` — Çalışmalar sayfası
+- `/about` — Hakkında sayfası
+- `/contact` — İletişim sayfası
+- `/lab` — Lab sayfası
+
+## Navigasyon Özelliği
+
+Menü, `src/components/menu/Menu.tsx` içinde tanımlanır. Bu bileşende:
+
+- Menü açma/kapama butonları
+- Overlay animasyonu
+- Sol taraf menü linkleri
+- Sağ taraf bilgi paneli / sidebar
+- GSAP timeline animasyonu yer alır
+
+Animasyonlar `menu.css` ve `useGSAP` ile yönetilir. Menü açıldığında linkler y ekseninde kayar, opaklık artar ve içeriğin görünürlüğü animasyonla tamamlanır.
+
+## Özelleştirme
+
+### Menü linklerini değiştirme
+
+`src/components/menu/Menu.tsx` içindeki `menuLinks` dizisine bakın:
+
+```ts
+const menuLinks = [
+  { path: "/", label: "Home", num: "01" },
+  { path: "/work", label: "Work", num: "02" },
+  { path: "/about", label: "About", num: "03" },
+  { path: "/contact", label: "Contact", num: "04" },
+  { path: "/lab", label: "Lab", num: "05" },
+];
+```
+
+### Renk ve stil değiştirme
+
+Aşağıdaki dosyalarda stil düzeni yapılabilir:
+
+- `src/components/menu/menu.css` — menü ve overlay stilleri
+- `src/app/globals.css` — genel arka plan, tipografi ve sayfa stilleri
+
+### Arka plan görseli değiştirme
+
+`public/hero.jpg` dosyası ana sayfa arka plan görselidir. İsterseniz bu dosyayı farklı bir görsel ile değiştirerek tasarımın genel hissini değiştirebilirsiniz.
+
+## Notlar
+
+- Proje, modern portfolio benzeri bir navigasyon örneği olarak tasarlanmıştır.
+- Bazı sidebar bağlantıları örnek içerik olarak bırakılmıştır; gerçek bağlantılar için ilgili sayfalar veya URL'ler güncellenebilir.
+- `href="#"` olan bazı linkler henüz gerçek hedefe bağlanmamıştır.
+
+## Sorun Giderme
+
+### 1) Bağımlılıklar kurulmadıysa
+
+```bash
+npm install
+```
+
+### 2) Port çakışması olursa
+
+```bash
+npm run dev -- --port 3001
+```
+
+### 3) Build hatası alırsanız
+
+Node.js sürümünüzün uyumlu olduğundan emin olun. Bu proje için Node.js 20+ önerilir.
+
+```bash
+node -v
+```
+
+### 4) Tarayıcıda sayfa açılmıyorsa
+
+- Geliştirme sunucusunun çalıştığını kontrol edin
+- `http://localhost:3000` adresini tekrar açın
+- `npm run dev` çıktısında gösterilen farklı bir port varsa onu kullanın
+
+## Vercel ile Yayınlama
+
+Bu proje Next.js olduğu için Vercel üzerinde kolayca yayınlanabilir:
+
+1. GitHub hesabınıza reposu pushleyin
+2. Vercel'de yeni proje oluşturun
+3. Repo seçin
+4. Varsayılan Next.js ayarları ile yayınlayın
+
+Vercel, Next.js uygulamaları için otomatik yapılandırma sağlar.
+
+## Geliştirme İpuçları
+
+- Menü animasyonunu geliştirmek için `Menu.tsx` içindeki `gsap.timeline()` düzenini inceleyebilirsiniz.
+- Ekstra sayfalar eklerken `src/app` altında yeni klasörler oluşturabilirsiniz.
+- Daha dinamik bir portfolio arayüzü için `work` sayfasında içerik kartları eklenebilir.
+
+## Lisans
+
+Bu proje için özel bir lisans dosyası belirtilmemiştir. Kişisel kullanım, geliştirme ve öğrenme amaçlı kullanılabilir.
+
+---
