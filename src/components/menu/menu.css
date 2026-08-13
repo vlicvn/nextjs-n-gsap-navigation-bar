@@ -1,0 +1,256 @@
+/* --- MENU CONTAINER & OVERLAY --- */
+.menu-container {
+  position: relative;
+  z-index: 100;
+  font-family: inherit;
+}
+
+.menu-bar,
+.menu-overlay,
+.menu-overlay-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 2.5em 3em;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* --- LOGOLAR --- */
+.menu-bar .menu-logo a {
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+  transform-origin: left center;
+}
+
+.menu-bar .menu-logo a:hover {
+  transform: translateX(8px) scale(1.02);
+  color: #ffffff;
+}
+
+.menu-overlay-bar .menu-logo a {
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  transform: none !important;
+}
+
+/* --- AÇ / KAPA BUTONLARI --- */
+.menu-open p {
+  color: #fff;
+  cursor: pointer;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.menu-close p {
+  color: #000;
+  cursor: pointer;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+  transform: none !important;
+}
+
+.menu-close p:hover {
+  color: #ffffff;
+}
+
+/* --- OVERLAY PANELİ --- */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 6em 3em 3em 3em;
+  background: #cf5b45; 
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+  box-sizing: border-box;
+}
+
+/* --- İKİ SÜTUNLU YENİ DÜZEN (SPLIT LAYOUT) --- */
+.menu-split-layout {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 4rem;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* --- SOL TARAFI LİNKLER --- */
+.menu-links-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu-link-item {
+  width: 100%;
+  overflow: hidden; /* Taşmayı engellemek için */
+}
+
+.menu-link-item-holder {
+  position: relative;
+  width: max-content;
+}
+
+.menu-link-item-holder a {
+  color: #000;
+  font-size: 64px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  text-decoration: none;
+  /* Kaydırma mesafesi güvenli boyuta çekildi */
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+  transform-origin: left center;
+}
+
+.menu-link-item-holder a:hover {
+  transform: translateX(6px); /* Sağ tarafa taşmayı önlemek için minimum kaydırma */
+  color: #ffffff; 
+}
+
+.link-num {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0;
+}
+
+/* --- SAĞ TARAF: BİLGİ/SİDEBAR ALANI --- */
+.menu-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  padding-left: 3rem;
+}
+
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sidebar-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: 600;
+}
+
+.featured-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1.2rem;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.featured-card:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.featured-subtitle {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 2px;
+}
+
+.featured-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+}
+
+.sidebar-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.2rem;
+}
+
+.sidebar-socials a,
+.sidebar-text {
+  color: #000;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.sidebar-socials a:hover {
+  color: #fff;
+}
+
+/* --- MOBİL UYUM --- */
+@media (max-width: 900px) {
+  .menu-bar,
+  .menu-overlay,
+  .menu-overlay-bar {
+    padding: 1.5em;
+  }
+
+  .menu-overlay {
+    padding-top: 5rem;
+    overflow-y: auto;
+  }
+
+  .menu-split-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .menu-link-item-holder a {
+    font-size: 40px;
+    gap: 1rem;
+  }
+
+  .menu-sidebar-col {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    padding-top: 1.5rem;
+    gap: 1.5rem;
+  }
+}
