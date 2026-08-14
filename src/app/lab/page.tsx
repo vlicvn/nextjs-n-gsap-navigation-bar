@@ -1,10 +1,8 @@
-import React from "react";
-
 const LabPage = () => {
   return (
     <div className="page-content hero">
       <h1>
-        Lab <sup>(03)</sup>
+        Lab <sup>(05)</sup>
       </h1>
     </div>
   );

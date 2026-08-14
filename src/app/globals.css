@@ -41,8 +41,13 @@ p {
 }
 
 .page-content.hero {
+  /* Görsel yüklenene kadar görünecek geçici renk */
+  background-color: #1a1a1a;
   background: url("../../public/hero.jpg") no-repeat 50% 50%;
   background-size: cover;
+  /* Performans için ek iyileştirme */
+  width: 100%;
+  height: 100vh;
 }
 
 h1 {

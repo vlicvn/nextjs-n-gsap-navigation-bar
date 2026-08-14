@@ -53,7 +53,7 @@ const Menu = () => {
             pointerEvents: "auto",
             duration: 0.4,
           },
-          "-=0.6"
+          "-=0.6",
         )
         .to(
           validLinks,
@@ -64,7 +64,7 @@ const Menu = () => {
             stagger: 0.04,
             ease: "power3.out",
           },
-          "-=0.5"
+          "-=0.5",
         )
         .to(
           sidebarRef.current,
@@ -74,18 +74,26 @@ const Menu = () => {
             duration: 0.8,
             ease: "power3.out",
           },
-          "-=0.6"
+          "-=0.6",
         );
     },
-    { scope: container }
+    { scope: container },
   );
 
   useEffect(() => {
     if (isMenuOpen) {
       tl.current?.play();
+      // Menü açıldığında arka planın scroll olmasını kilitle
+      document.body.style.overflow = "hidden";
     } else {
       tl.current?.reverse();
+      // Menü kapandığında kilidi kaldır
+      document.body.style.overflow = "";
     }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isMenuOpen]);
 
   return (
@@ -103,7 +111,9 @@ const Menu = () => {
               <Link href={"/"}>NextJS x GSAP</Link>
             </div>
             <div className="menu-close cursor-pointer" onClick={toggleMenu}>
-              <p>Close <span>&#x2715;</span></p>
+              <p>
+                Close <span>&#x2715;</span>
+              </p>
             </div>
           </div>
 
@@ -113,8 +123,8 @@ const Menu = () => {
               <div className="menu-links">
                 {menuLinks.map((link, index) => (
                   <div className="menu-link-item" key={link.label}>
-                    <div 
-                      className="menu-link-item-holder" 
+                    <div
+                      className="menu-link-item-holder"
                       onClick={toggleMenu}
                       ref={(el) => {
                         linkHoldersRef.current[index] = el;
@@ -134,7 +144,11 @@ const Menu = () => {
             <div className="menu-sidebar-col" ref={sidebarRef}>
               <div className="sidebar-section">
                 <span className="sidebar-title">Featured Project</span>
-                <Link href="/work" onClick={toggleMenu} className="featured-card">
+                <Link
+                  href="/work"
+                  onClick={toggleMenu}
+                  className="featured-card"
+                >
                   <span className="featured-subtitle">Digital Experience</span>
                   <span className="featured-title">Aether Studio &#8599;</span>
                 </Link>
@@ -143,18 +157,30 @@ const Menu = () => {
               <div className="sidebar-section">
                 <span className="sidebar-title">Social Networks</span>
                 <div className="sidebar-socials">
-                  <Link href="#" target="_blank" rel="noopener noreferrer">X &#8599;</Link>
-                  <Link href="#" target="_blank" rel="noopener noreferrer">Instagram &#8599;</Link>
-                  <Link href="#" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</Link>
-                  <Link href="#" target="_blank" rel="noopener noreferrer">Facebook &#8599;</Link>
+                  <Link href="#" target="_blank" rel="noopener noreferrer">
+                    X &#8599;
+                  </Link>
+                  <Link href="#" target="_blank" rel="noopener noreferrer">
+                    Instagram &#8599;
+                  </Link>
+                  <Link href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn &#8599;
+                  </Link>
+                  <Link href="#" target="_blank" rel="noopener noreferrer">
+                    Facebook &#8599;
+                  </Link>
                 </div>
               </div>
 
               <div className="sidebar-section">
                 <span className="sidebar-title">Legal & Policy</span>
                 <div className="sidebar-socials">
-                  <Link href="/privacy" onClick={toggleMenu}>Privacy Policy</Link>
-                  <Link href="/terms" onClick={toggleMenu}>Terms of Service</Link>
+                  <Link href="/privacy" onClick={toggleMenu}>
+                    Privacy Policy
+                  </Link>
+                  <Link href="/terms" onClick={toggleMenu}>
+                    Terms of Service
+                  </Link>
                 </div>
               </div>
 

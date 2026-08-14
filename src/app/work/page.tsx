@@ -1,5 +1,3 @@
-import React from "react";
-
 const WorkPage = () => {
   return (
     <div className="page-content hero">

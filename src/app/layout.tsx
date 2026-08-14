@@ -9,6 +9,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Next.js X GSAP Navigation Bar",
   description: "A Next.js project with GSAP navigation bar animation",
+  other: {
+    // Tüm sitede geçerli olmak üzere hero.jpg'yi tek yerden preload ediyoruz
+    "link": '<link rel="preload" href="/hero.jpg" as="image" />',
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
